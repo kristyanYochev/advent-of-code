@@ -7,9 +7,23 @@ fn main() {
 
   loop {
     let current_elf_calories = read_elf();
+    if current_elf_calories == 0 {
+      break;
+    }
+    
+    if current_elf_calories > most_calories {
+      third_most_calories = second_most_calories;
+      second_most_calories = most_calories;
+      most_calories = current_elf_calories;
+    } else if current_elf_calories > second_most_calories {
+      third_most_calories = second_most_calories;
+      second_most_calories = current_elf_calories;
+    } else if current_elf_calories > third_most_calories {
+      third_most_calories = current_elf_calories;
+    }
   }
 
-  println!("Most Calories an elf has are: {}", most_calories);
+  println!("Top 3 elves have a total of : {}", most_calories + second_most_calories + third_most_calories);
 }
 
 fn read_elf() -> u32 {
