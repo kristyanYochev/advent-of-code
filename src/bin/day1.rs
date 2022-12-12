@@ -2,19 +2,18 @@ use std::io;
 
 fn main() {
   let mut most_calories = 0;
+  let mut second_most_calories = 0;
+  let mut third_most_calories = 0;
 
-  while let Some(calorie_list) = read_elf() {
-    let total_calories = calorie_list.iter().sum();
-    if total_calories > most_calories {
-      most_calories = total_calories;
-    }
+  loop {
+    let current_elf_calories = read_elf();
   }
 
   println!("Most Calories an elf has are: {}", most_calories);
 }
 
-fn read_elf() -> Option<Vec<u32>> {
-  let mut calories_list = Vec::new();
+fn read_elf() -> u32 {
+  let mut total_calories: u32 = 0;
 
   loop {
     let mut line = String::new();
@@ -29,12 +28,8 @@ fn read_elf() -> Option<Vec<u32>> {
     }
 
     let food_calories = line.trim().parse::<u32>().unwrap();
-    calories_list.push(food_calories);
+    total_calories += food_calories;
   }
 
-  if calories_list.len() != 0 {
-    Some(calories_list)
-  } else {
-    None
-  }
+  total_calories
 }
